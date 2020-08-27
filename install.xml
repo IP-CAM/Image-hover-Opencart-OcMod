@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>OC Change Image on Hover</name>
+    <code>change-img-hover</code>
+    <version>1.0</version>
+    <author>Igor Cantelmo</author>
+    <link>https://linkedin.com/in/igor-cantelmo-dev</link>
+
+    <file path="catalog/view/theme/*/template/product/{category,manufacturer,special,search}*.twig|catalog/view/theme/*/template/extension/module/{bestseller,featured,latest,special}*.twig">
+        <operation>
+            <search><![CDATA[
+            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+            ]]></search>
+            <add position="replace"><![CDATA[
+            <div class="image"><a href="{{ product.href }}">
+                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
+                <img class="image2" src="{{ product.thumb2 }}" alt="{{ product.name }}" title="{{ product.name }}" />
+            </a></div>
+            ]]></add>
+        </operation>
+    </file>  
+
+    <file path="catalog/controller/product/{category,manufacturer,product,special,search}*.php">
+        <operation>
+            <search><![CDATA[
+            $data['products'][] = array(
+            ]]></search>
+            <add position="before"><![CDATA[
+            $image_results = $this->model_catalog_product->getProductImages($result['product_id']);
+
+				if ($image_results) {
+					$image2 = $this->model_tool_image->resize($image_results[0]['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
+				} else {
+					$image2 = false;
+			    }
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+            'thumb'       => $image,
+            ]]></search>
+            <add position="after"><![CDATA[
+					'thumb2'       => $image2,
+					
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/controller/extension/module/{bestseller,latest,special}*.php">
+        <operation>
+            <search><![CDATA[
+            $data['products'][] = array(
+            ]]></search>
+            <add position="before"><![CDATA[
+            $image_results = $this->model_catalog_product->getProductImages($result['product_id']);
+
+				if ($image_results) {
+					$image2 = $this->model_tool_image->resize($image_results[0]['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
+				} else {
+					$image2 = false;
+			    }
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+            'thumb'       => $image,
+            ]]></search>
+            <add position="after"><![CDATA[
+					'thumb2'       => $image2,
+					
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/controller/extension/module/featured.php">
+        <operation>
+            <search><![CDATA[
+            $data['products'][] = array(
+            ]]></search>
+            <add position="before"><![CDATA[
+            $image_results = $this->model_catalog_product->getProductImages($product_info['product_id']);
+
+				if ($image_results) {
+					$image2 = $this->model_tool_image->resize($image_results[0]['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
+				} else {
+					$image2 = false;
+			    }
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[
+            'thumb'       => $image,
+            ]]></search>
+            <add position="after"><![CDATA[
+					'thumb2'       => $image2,
+					
+            ]]></add>
+        </operation>
+    </file>
+</modification>
