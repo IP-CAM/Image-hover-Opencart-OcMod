@@ -14,7 +14,7 @@
             <add position="replace"><![CDATA[
             <div class="image"><a href="{{ product.href }}">
                 <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
-                <img class="image2" src="{{ product.thumb2 }}" alt="{{ product.name }}" title="{{ product.name }}" />
+                <img class="image2" src="{{ product.thumb2 }}" />
             </a></div>
             ]]></add>
         </operation>
