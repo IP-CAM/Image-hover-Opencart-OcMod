@@ -1,12 +1,12 @@
-<h3>COMO USAR A EXTENSÃO</h3>
+<h3> HOW TO USE THE EXTENSION </h3>
 
-- Dentro do painel de admin open cart > Extensões > Instalador
+- Inside the admin panel open cart> Extensions> Installer
 
-- Fazer o upload do OC_img_hover.ocmod.zip que irá rodar o arquivo .xml
+- Upload OC_img_hover.ocmod.zip which will run the .xml file
 
-- Em seguida adicione em seu stylesheet.css as classes css encontradas no arquivo oc-image-hover.css ou aqui em baixo:
+- Then add in your stylesheet.css the css classes found in the file oc-image-hover.css or below:
 
-<quote>Obs: a imagem que irá aparecer com o mouse hover será sempre a segunda imagem referente ao produto.</quote>
+<quote> Note: the image that will appear with the mouse hover will always be the second image for the product. </quote> 
 
 ```css
 .product-thumb .image2 {
